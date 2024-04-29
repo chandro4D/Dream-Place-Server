@@ -52,7 +52,7 @@ async function run() {
 
     })
 
-    add.put('/addTouristsSport/:id',async(req,res) => {
+    app.put('/addTouristsSport/:id',async(req,res) => {
       const id = req.params.id;
       const filter = {_id: new ObjectId(id)}
       const options = { upsert: true };
@@ -79,7 +79,7 @@ async function run() {
 
     app.delete('/addTouristsSport/:id', async(req,res) => {
         const id = req.params.id;
-        const query = {_id: new ObjectId(id)}
+        const query = { _id: new ObjectId(id) }
         const result = await touristsSportCollection.deleteOne(query);
         res.send(result);
     })
