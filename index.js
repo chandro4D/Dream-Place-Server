@@ -37,11 +37,43 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/addTouristsSport/:id',async(req,res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result =await touristsSportCollection.findOne(query);
+      res.send(result);
+    })
+
     app.post('/addTouristsSport',async(req,res) => {
         const newSport = req.body;
         console.log(newSport);
         const result = await touristsSportCollection.insertOne(newSport)
         res.send(result);
+
+    })
+
+    add.put('/addTouristsSport/:id',async(req,res) => {
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const options = { upsert: true };
+      const updateSport =req.body;
+      const Sports = {
+        $set: {
+          ImageURL: updateSport.ImageURL,
+          TouristsSportName: updateSport.TouristsSportName,
+          CountryName: updateSport.CountryName,
+          Location: updateSport.Location,
+          ShortDescription: updateSport.ShortDescription,
+          AverageCost: updateSport.AverageCost,
+          Seasonality: updateSport.Seasonality, 
+          TravelTime: updateSport.TravelTime, 
+          UserEmail: updateSport.UserEmail, 
+          UserName: updateSport.UserName, 
+          TotalVisitors: updateSport.TotalVisitors
+        }
+      }
+      const result = await touristsSportCollection.updateOne(filter,Sports,options);
+      res.send(result);
 
     })
 
