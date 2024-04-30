@@ -30,6 +30,21 @@ async function run() {
     // await client.connect();
 
     const touristsSportCollection = client.db('touristsSportDB').collection('touristsSport');
+    const touristsSportSection = client.db('touristsSportDB').collection('SportSection');
+    const allCountrySection = client.db('touristsSportDB').collection('countrySection');
+
+
+    app.get('/sportSection',async(req,res) =>{
+      const cursor = touristsSportSection.find()
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+    app.get('/countrySection',async(req,res) =>{
+      const cursor = allCountrySection.find()
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
 
     app.get('/addTouristsSport',async(req,res) =>{
         const cursor = touristsSportCollection.find();
