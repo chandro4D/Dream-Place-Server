@@ -6,8 +6,9 @@ const app = express();
 const port = process.env.port || 7000;
 
 
-
+// https://assignment-ten-server-ecru-ten.vercel.app
 // --------middleware------------
+// app.use(cors({origin:["http://localhost:5173","https://assignment-ten-client-f79aa.web.app"]}));
 app.use(cors());
 app.use(express.json());
 
